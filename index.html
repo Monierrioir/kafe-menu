@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kafe Menü</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .input-group {
+      margin: 15px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .menu-item {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn {
+      background-color: #25D366;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .btn {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>☕ KAFE MENÜ | CAFE MENU</h1>
+
+  <div class="input-group">
+    <label for="table">Masa Numarası / Table Number</label>
+    <input type="text" id="table" placeholder="Örn: 3" />
+  </div>
+
+  <div class="input-group">
+    <label for="note">Notunuz (isteğe bağlı) / Notes (optional)</label>
+    <textarea id="note" rows="2" placeholder="Örn: Şekersiz olsun, sütlü olmasın..."></textarea>
+  </div>
+
+  <div class="menu-item">
+    <span>Latte – 50₺</span>
+    <a class="btn" onclick="sendOrder('Latte')">Sipariş Ver</a>
+  </div>
+
+  <div class="menu-item">
+    <span>Espresso – 40₺</span>
+    <a class="btn" onclick="sendOrder('Espresso')">Sipariş Ver</a>
+  </div>
+
+  <div class="menu-item">
+    <span>Türk Kahvesi – 35₺</span>
+    <a class="btn" onclick="sendOrder('Türk Kahvesi')">Sipariş Ver</a>
+  </div>
+
+  <div class="menu-item">
+    <span>Cold Brew – 55₺</span>
+    <a class="btn" onclick="sendOrder('Cold Brew')">Sipariş Ver</a>
+  </div>
+
+  <script>
+    function sendOrder(itemName) {
+      const phone = "905301234567"; // 🔁 Telefon numaranı buraya yaz (ülke koduyla, 90 ile başlamalı)
+      const table = document.getElementById("table").value.trim();
+      const note = document.getElementById("note").value.trim();
+
+      if (!table) {
+        alert("Lütfen masa numaranızı girin.");
+        return;
+      }
+
+      let message = `Merhaba, ${table} numaralı masadan ${itemName} siparişi vermek istiyorum.`;
+      if (note) {
+        message += ` Not: ${note}`;
+      }
+
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
